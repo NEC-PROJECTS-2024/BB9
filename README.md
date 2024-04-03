@@ -1,4 +1,4 @@
-![image](https://github.com/NEC-PROJECTS-2024/BB9/assets/127286620/71f7dcda-4a46-4bf2-a298-d26cb1a4d4b5)# DB2
+# BB9
 
 Mental Health Prediction Using Machine Learning
 

@@ -1,0 +1,402 @@
+<html>
+
+    <head>
+        <nav>
+            <h1>Mental Health Prediction</h1><br/>
+        </nav>
+        <br><br/>
+    </head>
+    <style>
+        nav{
+            width: 100%;
+            height: 45px;
+            background-color: #d8b7b0;
+            text-align: center;
+            font-size: 25px;
+        }
+    </style>
+
+    <body>
+        <form action="{{ url_for('predict')}}"method="POST">
+            <table>
+<!--                <tr>-->
+<!--                    <td>-->
+<!--                        Timestamp-->
+<!--                        <br><br/>-->
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                        <input type="time" name="timestamp" step="1">-->
+<!--                        <br><br/>-->
+<!--                    </td>-->
+<!--                </tr>-->
+                <tr>
+                    <td>
+                        Age
+                        <br><br/>
+                    </td>
+                    <td>
+                        <input type="number"  name="age" min="15" required>
+                        <br><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Gender
+                        <br><br/>
+                    </td>
+                    <td>
+                        <input list="gender" name="gender" required>
+                        <datalist id="gender">
+                            <option value="Female">
+                            <option value="Male">
+                            <option value="Other">
+                        </datalist>
+                        <br><br/>
+                    </td>
+                </tr>
+<!--                <tr>-->
+<!--                    <td>-->
+<!--                        Country-->
+<!--                        <br><br/>-->
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                        <input type="text" name="Country">-->
+
+<!--                        <br><br/>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td>-->
+<!--                        State-->
+<!--                        <br><br/>-->
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                        <input type="text" name="state">-->
+<!--                        <br><br/>-->
+<!--                    </td>-->
+<!--                </tr>-->
+                <tr>
+                    <td>
+                        Are you self employed ?
+                        <br><br/>
+                    </td>
+                    <td>
+                        <input list="self-employed" name="self_employed" required>
+                        <datalist id="self-employed">
+                            <option value="Yes">
+                            <option value="No">
+                        </datalist>
+                        <br><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Do you have a family history of mental illness?
+                        <br><br/>
+                    </td>
+                    <td>
+                        <input list="family-history" name="family_history" required>
+                        <datalist id="family-history">
+                            <option value="Yes">
+                            <option value="No">
+                        </datalist>
+                        <br><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        If you have a mental health condition, <br/>
+                        do you feel that it interferes with your work ?
+                        <br><br/>
+                    </td>
+                    <td>
+                        <input list="work_interfere" name="work_interfere" required>
+                        <datalist id="work_interfere">
+                            <option value="Never">
+                            <option value="Rarely">
+                            <option value="Sometimes">
+                            <option value="Often"></option>
+                        </datalist>
+                        <br><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    How many employees does your company have ?
+                    <br><br/>
+                    </td>
+                    <td>
+                        <input list="no_employees" name="no_employees" required>
+                        <datalist id="no_employees">
+                            <option value="1-25">
+                            <option value="6-25">
+                            <option value="26-100">
+                            <option value="100-500">
+                            <option value="500-1000">
+                            <option value="More than 1000">
+
+                        </datalist>
+                        <br><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Do you work remotely (outside of an office) at least 50% of the time ?
+                        <br><br/>
+                    </td>
+                    <td>
+                        <input list="remote_work" name="remote_work" required>
+                        <datalist id="remote_work">
+                            <option value="Yes">
+                            <option value="No">
+                        </datalist>
+                        <br><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Is your employer primarily a tech company organization ?
+                    <br><br/>
+                    </td>
+                    <td>
+                        <input list="tech_company" name="tech_company" required>
+                        <datalist id="tech_company">
+                            <option value="Yes">
+                            <option value="No">
+                        </datalist>
+                        <br><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Does your company provide mental health benefits ?
+                        <br><br/>
+                    </td>
+                    <td>
+                        <input list="benefits" name="benefits" required>
+                        <datalist id="benefits">
+                            <option value="Yes">
+                            <option value="No">
+                            <option value="Don't know">
+                        </datalist>
+                        <br><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Do you know the options for mental health care your employer provides ?
+                        <br><br/>
+                    </td>
+                    <td>
+                        <input list="care_options" name="care_options" required>
+                        <datalist id="care_options">
+                            <option value="Yes">
+                            <option value="No">
+                            <option value="Not sure">
+                        </datalist>
+                        <br><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Has your employer ever discussed<br/>
+                        mental health as a part of an employee wellness program ?
+                        <br><br/>
+                    </td>
+                    <td>
+                        <input list="wellness_program" name="wellness_program" required>
+                        <datalist id="wellness_program">
+                            <option value="Yes">
+                            <option value="No">
+                            <option value="Don't know">
+                        </datalist>
+                        <br><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Does your company provide resources to learn more about<br/>
+                         mental health issues and how to seek help ?
+                         <br><br/>
+                    </td>
+                    <td>
+                        <input list="seek_help" name="seek_help" required>
+                        <datalist id="seek_help">
+                            <option value="Yes">
+                            <option value="No">
+                            <option value="Don't know">
+                        </datalist>
+                        <br><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Is your anonymity protected if you chose to take advantage<br/>
+                        of mental health abuse treatment resources ?
+                         <br><br/>
+                    </td>
+                    <td>
+                        <input list="anonymity" name="anonymity" required>
+                        <datalist id="anonymity">
+                            <option value="Yes">
+                            <option value="No">
+                            <option value="Don't know">
+                        </datalist>
+                        <br><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        How easy is it for you to take medical leave for a mental health condition ?
+                         <br><br/>
+                    </td>
+                    <td>
+                        <input list="leave" name="leave" required>
+                        <datalist id="leave">
+                            <option value="Somewhat easy">
+                            <option value="Very easy">
+                            <option value="Somewhat difficult">
+                            <option value="Very difficult">
+                            <option value="Don't Know">
+                        </datalist>
+                        <br><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Do you think that discussing a mental health issue with your employee<br/>
+                        would have negative consequence ?
+                         <br><br/>
+                    </td>
+                    <td>
+                        <input list="mental_health_consequence" name="mental_health_consequence" required>
+                        <datalist id="mental_health_consequence">
+                            <option value="Yes">
+                            <option value="No">
+                            <option value="May be">
+                        </datalist>
+                        <br><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Do you think that discussing a physical health issue with your employee<br/>
+                        would have negative consequence ?
+                         <br><br/>
+                    </td>
+                    <td>
+                        <input list="phys_health_consequence" name="phys_health_consequence" required>
+                        <datalist id="phys_health_consequence">
+                            <option value="Yes">
+                            <option value="No">
+                            <option value="May be">
+                        </datalist>
+                        <br><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Would you be willing to discuss a mental health issue with your coworkers ?
+                         <br><br/>
+                    </td>
+                    <td>
+                        <input list="coworkers" name="coworkers" required>
+                        <datalist id="coworkers">
+                            <option value="Yes">
+                            <option value="No">
+                            <option value="Some of them">
+                        </datalist>
+                        <br><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Would you be willing to discuss a mental health issue with your direct supervisor ?
+                         <br><br/>
+                    </td>
+                    <td>
+                        <input list="supervisor" name="supervisor" required>
+                        <datalist id="supervisor">
+                            <option value="Yes">
+                            <option value="No">
+                            <option value="Some of them">
+                        </datalist>
+                        <br><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Would you bring up a mental health issue with a potential employer in an interview ?
+                         <br><br/>
+                    </td>
+                    <td>
+                        <input list="mental_health_interview" name="mental_health_interview" required>
+                        <datalist id="mental_health_interview">
+                            <option value="Yes">
+                            <option value="No">
+                            <option value="May be">
+                        </datalist>
+                        <br><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Would you bring up a physical health issue with a potential employer in an interview ?
+                         <br><br/>
+                    </td>
+                    <td>
+                        <input list="phys_health_interview" name="phys_health_interview" required>
+                        <datalist id="phys_health_interview">
+                            <option value="Yes">
+                            <option value="No">
+                            <option value="May be">
+                        </datalist>
+                        <br><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Do you feel that your employer takes mental health as seriously as physical health ?
+                         <br><br/>
+                    </td>
+                    <td>
+                        <input list="mental_vs_physical" name="mental_vs_physical" required>
+                        <datalist id="mental_vs_physical">
+                            <option value="Yes">
+                            <option value="No">
+                            <option value="Don't know">
+                        </datalist>
+                        <br><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Have you heard of or observed negative consequences for coworkers<br/>
+                         with mental health conditions in your workplace ?
+                         <br><br/>
+                    </td>
+                    <td>
+                        <input list="obs_consequence" name="obs_consequence" required>
+                        <datalist id="obs_consequence">
+                            <option value="Yes">
+                            <option value="No">
+                        </datalist>
+                        <br><br/>
+                    </td>
+                </tr>
+<!--                <tr>-->
+<!--                <td>-->
+<!--                   Comments-->
+<!--                     <br><br/>-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                    <input type="text" name="comments">-->
+<!--                    <br><br/>-->
+<!--                </td>-->
+<!--                </tr>-->
+            </table>
+            <p><button type="Predict" class="btn btn-primary btn-block btn-large" color='black'>Predict</button></p>
+            {{prediction}}
+        </form>
+    </body>
+</html>
